@@ -19,9 +19,17 @@ jobs:
       
       - name: Rebuild
         run: |
-         sudo apt install python2-minimal
-         npm install
-         npm run translate
+         run: |
+          sudo apt update
+          sudo apt install -y build-essential
+          wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz
+          tar -xzf Python-2.7.18.tgz
+          cd Python-2.7.18
+          ./configure
+          make
+          sudo make install
+          npm install
+          npm run translate
        
       - name: Upload built-dist
         uses: actions/upload-artifact@v4
